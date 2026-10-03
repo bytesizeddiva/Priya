@@ -26,7 +26,9 @@ class ErrorBoundary extends Component<{ children: ReactNode }, ErrorBoundaryStat
       return (
         <main className="min-h-screen flex flex-col items-center justify-center gap-3 px-6 text-center">
           <h1 className="text-lg font-semibold text-neutral-900">Something went wrong</h1>
-          <p className="text-sm text-neutral-600">This page hit an unexpected error. Try reloading it.</p>
+          <p className="text-sm text-neutral-600">
+            This page hit an unexpected error. Try reloading it.
+          </p>
           <button
             type="button"
             onClick={() => window.location.reload()}

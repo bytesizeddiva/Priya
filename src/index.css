@@ -1,14 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/*
- * Priya Jadhav — portfolio
- *
- * Shares the design system with the priti site (greyscale palette, Switzer,
- * hairline rules, mono micro-labels) but uses a different structure: a stacked
- * hero and a numbered editorial work list rather than side-by-side rows.
- */
-
 @layer base {
   html {
     font-family: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -24,7 +16,7 @@
  * The gradient is always painted, but parked at 0% where its stops are flat
  * ink — so the resting text looks like ordinary text with no flash when the
  * hover state arrives. Sweeping the background-position moves a bright colour
- * band across the glyphs, and back.
+ * band across the glyphs, and back, like a "thinking" shimmer.
  */
 @keyframes aurora-sweep {
   0% {

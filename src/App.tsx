@@ -2,29 +2,14 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Portrait } from './components/Portrait';
 import { Headline } from './components/Headline';
 import { Dock } from './components/Dock';
-import { Intro } from './components/Intro';
+import { AboutView } from './components/AboutView';
 import { Works } from './components/Works';
 import { Connect } from './components/Connect';
-import { Rule } from './components/Rule';
+import { ChequerBand } from './components/Decor';
 import { Toast } from './components/Toast';
 
-/*
- * ─────────────────────────────────────────────────────────────────────────────
- * EDIT THESE — everything personal lives here.
- * ─────────────────────────────────────────────────────────────────────────────
- */
-export const SITE = {
-  name: 'Priya Jadhav',
-  /** Two lines, set large in the hero. */
-  roleLine1: 'Product',
-  roleLine2: 'Designer',
-  email: 'priya@example.com',
-  xUrl: 'https://x.com/priyajadhav',
-  linkedinUrl: 'https://linkedin.com/in/priyajadhav',
-  githubUrl: 'https://github.com/priyajadhav',
-} as const;
-/* ───────────────────────────────────────────────────────────────────────────── */
-
+const EMAIL = 'priya.jadhav@gmail.com';
+const X_URL = 'https://x.com/priyajadhav';
 const TOAST_DURATION_MS = 2400;
 
 export default function App() {
@@ -37,6 +22,7 @@ export default function App() {
     toastTimer.current = setTimeout(() => setToastMessage(null), TOAST_DURATION_MS);
   }, []);
 
+  // Clear the pending timer if the app unmounts before it fires.
   useEffect(
     () => () => {
       if (toastTimer.current) clearTimeout(toastTimer.current);
@@ -46,8 +32,8 @@ export default function App() {
 
   /**
    * Copies `text` and only reports success once the write resolves.
-   * `navigator.clipboard` is undefined outside secure contexts, so we report
-   * that plainly instead of claiming a copy that never happened.
+   * `navigator.clipboard` is undefined outside secure contexts (e.g. plain-http
+   * LAN access), so we report that plainly instead of claiming success.
    */
   const copyToClipboard = useCallback(
     async (text: string, successMessage: string) => {
@@ -65,40 +51,61 @@ export default function App() {
     [showToast]
   );
 
+  const handleCopyEmail = useCallback(
+    () => copyToClipboard(EMAIL, `Email copied (${EMAIL})`),
+    [copyToClipboard]
+  );
+
+  const handleCopyX = useCallback(
+    () => copyToClipboard(X_URL, 'X link copied (x.com/priyajadhav)'),
+    [copyToClipboard]
+  );
+
   return (
-    <div className="min-h-screen bg-[#fafafa] relative flex flex-col items-start overflow-x-hidden font-['Switzer',sans-serif] selection:bg-neutral-200">
-      {/* Page column. Indented and narrower than the priti site — the hero is
-          stacked, so it reads as a single column of type rather than a row. */}
-      <div className="relative z-10 w-full max-w-[560px] mx-auto px-6 sm:px-8 py-12 sm:py-20 lg:py-24 flex flex-col items-start">
-        {/* Stacked hero: portrait above the role statement */}
-        <Portrait />
-        <Headline name={SITE.name} line1={SITE.roleLine1} line2={SITE.roleLine2} />
+    <div className="min-h-screen bg-[#fafafa] relative flex flex-col items-center justify-start overflow-x-hidden font-['Switzer',sans-serif] selection:bg-neutral-200">
+      {/* Subtle radial ambient highlight */}
+      <div
+        className="pointer-events-none fixed inset-0 opacity-40"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(220, 220, 230, 0.4) 0%, rgba(250, 250, 250, 0) 70%)',
+        }}
+        aria-hidden="true"
+      />
 
-        {/* Tooling */}
-        <Dock className="mt-8" />
+      {/* Page column */}
+      <div className="relative z-10 w-full max-w-[620px] mx-auto px-6 sm:px-8 py-14 sm:py-24 lg:py-28 flex flex-col items-start">
+        {/* Portrait and headline */}
+        <div className="w-full flex items-center gap-4 sm:gap-5 pb-5 sm:pb-6">
+          <div className="shrink-0">
+            <Portrait />
+          </div>
+          <div className="flex-1 min-w-0">
+            <Headline />
+          </div>
+        </div>
 
-        {/* Hairline rule — this site's stand-in for priti's chequer band */}
-        <Rule className="mt-9" />
+        {/* Decorative brand glyphs */}
+        <Dock />
 
-        {/* Intro */}
-        <Intro />
+        {/* Chequered flag band */}
+        <ChequerBand className="mt-6 mb-7" />
 
-        {/* Selected work — numbered editorial list */}
-        <Works className="mt-11" githubUrl={SITE.githubUrl} />
+        {/* Bio */}
+        <AboutView />
 
-        {/* Connect */}
-        <div className="w-full mt-9 pt-5 border-t border-black/[0.06]">
-          <Connect
-            email={SITE.email}
-            xUrl={SITE.xUrl}
-            linkedinUrl={SITE.linkedinUrl}
-            onCopyEmail={() => copyToClipboard(SITE.email, `Email copied (${SITE.email})`)}
-            onCopyX={() => copyToClipboard(SITE.xUrl, 'X link copied')}
-            onCopyLinkedIn={() => copyToClipboard(SITE.linkedinUrl, 'LinkedIn link copied')}
-          />
+        {/* Selected work */}
+        <Works className="mt-9" />
+
+        {/* Connect. The 9px margin here completes the 19px of space below the
+            GitHub link (10px of its own padding + 9px), so that label sits
+            centred between its rule and the one here. */}
+        <div className="w-full mt-[9px] pt-5 border-t border-black/[0.06]">
+          <Connect onCopyEmail={handleCopyEmail} onCopyX={handleCopyX} />
         </div>
       </div>
 
+      {/* Toast Notification */}
       <Toast message={toastMessage} />
     </div>
   );

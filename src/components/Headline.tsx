@@ -1,26 +1,30 @@
 import React from 'react';
 
-interface HeadlineProps {
-  name: string;
-  line1: string;
-  line2: string;
-}
-
-/**
- * Stacked hero: name as a quiet mono label, then the role set large across
- * two lines. The priti site sets this side-by-side with the portrait; here it
- * runs full width beneath it, which reads as a different kind of statement.
- */
-export const Headline: React.FC<HeadlineProps> = ({ name, line1, line2 }) => {
+export const Headline: React.FC = () => {
   return (
-    <div className="mt-5 w-full text-left">
-      <h2 className="font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
-        {name}
+    <div className="text-left w-full flex flex-col justify-center py-0.5">
+      {/* Subtitle / Name */}
+      <h2 className="text-[13px] sm:text-[14px] text-neutral-500 font-medium tracking-normal mb-1.5 font-['Switzer',sans-serif] leading-tight">
+        Priya Jadhav
       </h2>
 
-      <h1 className="mt-3 text-[34px] sm:text-[44px] font-normal leading-[1.05] tracking-[-0.03em] text-[#141416]">
-        <span className="block">{line1}</span>
-        <span className="block text-neutral-400">{line2}</span>
+      {/* Main Headline */}
+      <h1 className="text-[19px] sm:text-[22px] md:text-[24px] leading-[1.22] font-normal tracking-[-0.015em] text-[#141416] font-['Switzer',sans-serif]">
+        <span className="inline-flex items-center gap-1.5 sm:gap-2">
+          <span>Developer</span>
+          {/* Code brackets as a literal glyph in Geist Mono — echoes the </> on
+              the OG image, and a monospace face gives the slash even weight
+              against the bracketing angle marks. Mono advances are wide, so
+              tracking is pulled in to -0.1em to read as one compact mark
+              rather than three separate characters. */}
+          <span
+            aria-hidden="true"
+            className="font-['Geist_Mono',monospace] text-[20px] sm:text-[24px] leading-none tracking-[-0.1em] text-[#141416] self-center"
+          >
+            &lt;/&gt;
+          </span>
+        </span>
+        <span className="block mt-0.5 text-neutral-900">and AI researcher</span>
       </h1>
     </div>
   );
