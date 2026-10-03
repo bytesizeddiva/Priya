@@ -6,7 +6,6 @@ import {
   siNextdotjs,
   siTailwindcss,
   siSupabase,
-  siDocker,
 } from 'simple-icons';
 
 interface TechIcon {
@@ -31,9 +30,6 @@ const ICONS: TechIcon[] = [
 
   // Data & backend
   { name: 'Supabase', path: siSupabase.path },
-
-  // Infrastructure & delivery
-  { name: 'Docker', path: siDocker.path },
 ];
 
 export const Dock: React.FC = () => {

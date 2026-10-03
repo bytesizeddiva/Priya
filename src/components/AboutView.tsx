@@ -6,10 +6,10 @@ import React from 'react';
  * deliberately not repeated here.
  */
 const ABOUT =
-  'I am a developer and AI researcher with 10+ years of experience ' +
-  'building products end to end — previously at Google and Meta, and with research ' +
-  'teams at Yandex and Anthropic. I build production AI systems and developer ' +
-  'tooling, and currently lead AI engineering and product architecture on-demand.';
+  'I build things for the web, and I am keeping a close eye on where AI research is ' +
+  'heading. Reading what gets released, being skeptical of the claims, trying to see ' +
+  'what is real underneath. Studying computer science alongside it to get the ' +
+  'foundations right. Still early, learning quickly.';
 
 export const AboutView: React.FC = () => {
   return (

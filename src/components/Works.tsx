@@ -25,7 +25,7 @@ interface Work {
  * name renders as plain text instead of a link.
  */
 /** Where the "See more work" row points. */
-const GITHUB_URL = 'https://github.com/priyajadhav';
+const GITHUB_URL = 'https://github.com/bytesizeddiva';
 
 const WORKS: Work[] = [
   {
