@@ -101,7 +101,7 @@ export default function App() {
             GitHub link (10px of its own padding + 9px), so that label sits
             centred between its rule and the one here. */}
         <div className="w-full mt-[9px] pt-5 border-t border-black/[0.06]">
-          <Connect onCopyEmail={handleCopyEmail} onCopyX={handleCopyX} />
+          <Connect email={EMAIL} onCopyEmail={handleCopyEmail} onCopyX={handleCopyX} />
         </div>
       </div>
 
