@@ -51,15 +51,11 @@ export default function App() {
     [showToast]
   );
 
-  const handleCopyEmail = useCallback(
-    () => copyToClipboard(EMAIL, `Email copied (${EMAIL})`),
-    [copyToClipboard]
-  );
-
   const handleCopyX = useCallback(
     () => copyToClipboard(X_URL, 'X link copied (x.com/priyajadhav)'),
     [copyToClipboard]
   );
+
 
   return (
     <div className="min-h-screen bg-[#fafafa] relative flex flex-col items-center justify-start overflow-x-hidden font-['Switzer',sans-serif] selection:bg-neutral-200">
@@ -101,7 +97,7 @@ export default function App() {
             GitHub link (10px of its own padding + 9px), so that label sits
             centred between its rule and the one here. */}
         <div className="w-full mt-[9px] pt-5 border-t border-black/[0.06]">
-          <Connect email={EMAIL} onCopyEmail={handleCopyEmail} onCopyX={handleCopyX} />
+          <Connect email={EMAIL} onCopyX={handleCopyX} />
         </div>
       </div>
 
